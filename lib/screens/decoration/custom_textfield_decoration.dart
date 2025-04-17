@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration customInputDecoration(String label,IconData icon){
+InputDecoration customInputDecoration(String label,IconData? icon){
   return InputDecoration(
     labelText: label,
     prefixIcon: Icon(icon),

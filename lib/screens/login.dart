@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logiology/controllers/login_controller.dart';
 import 'package:logiology/screens/decoration/custom_textfield_decoration.dart';
+// import 'package:logiology/widgets/text_field.dart';
 
 class LoginPage extends StatelessWidget {
 
@@ -23,17 +24,30 @@ final controller = Get.put(LoginController());
          // color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [            
-              TextField(
+            children: [   
+                 TextField(
                 decoration: customInputDecoration('Username', Icons.person),
                 onChanged: (value) => controller.username.value = value,
-              ),
+              ),         
+              // custom_textfield(
+              //   controller: controller, 
+              //   labelText: 'Username',
+              //   icon: Icons.person,
+              //   onChanged: controller.username,
+              //   ),
               SizedBox(height: 16,),
-                TextField(
+                 TextField(
                 decoration: customInputDecoration('Password', Icons.lock),
                   obscureText: true,
                 onChanged: (value) => controller.password.value = value,
               ),
+              // custom_textfield(
+              //   controller: controller, 
+              //   labelText: 'Password',
+              //   icon: Icons.lock,
+              //   onChanged: controller.password,
+              //   ),
+             
               SizedBox(height: 30,),
               Container(
                 height: 30,
@@ -54,3 +68,4 @@ final controller = Get.put(LoginController());
     );
   }
 }
+
