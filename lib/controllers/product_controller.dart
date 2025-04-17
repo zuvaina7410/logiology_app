@@ -6,26 +6,25 @@ import 'package:http/http.dart' as http;
 
 class ProductController extends GetxController {
   
-// var productList = <Product>[].obs;
-// var isLoading = true.obs; 
-
 var allProducts = <Product>[].obs;
-var filteredProducts = <Product>[].obs;
+  var filteredProducts = <Product>[].obs;
 
- // Store filters
+  var searchText = ''.obs;
+
+  // Filter options
   var selectedCategory = ''.obs;
   var selectedTag = ''.obs;
   var maxPrice = 0.0.obs;
 
-@override
+  @override
   void onInit() {
-   
     fetchProducts();
     super.onInit();
   }
 
-   void fetchProducts() async {
-   final url = Uri.parse("https://dummyjson.com/products");
+
+  void fetchProducts() async {
+    final url = Uri.parse("https://dummyjson.com/products");
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -35,7 +34,7 @@ var filteredProducts = <Product>[].obs;
             .toList();
 
         allProducts.value = products;
-        filteredProducts.value = products; // show all initially
+        filteredProducts.value = products; 
       } else {
         Get.snackbar("Error", "Failed to load products");
       }
@@ -51,21 +50,36 @@ var filteredProducts = <Product>[].obs;
     applyFilters();
   }
 
-    void applyFilters() {
-    filteredProducts.value = allProducts.where((product) {
+ 
+
+  void applyFilters() {
+    List<Product> filtered = allProducts.where((product) {
       final matchCategory = selectedCategory.value.isEmpty ||
           product.category.toLowerCase() == selectedCategory.value.toLowerCase();
 
       final matchTag = selectedTag.value.isEmpty ||
-          product.tags.any((t) => t.toLowerCase() == selectedTag.value.toLowerCase());
+          product.tags.any((t) =>
+              t.toLowerCase() == selectedTag.value.toLowerCase());
 
       final matchPrice = maxPrice.value == 0.0 ||
           product.price <= maxPrice.value;
 
       return matchCategory && matchTag && matchPrice;
     }).toList();
+
+    if (searchText.value.isNotEmpty) {
+      filtered = filtered.where((product) =>
+          product.title.toLowerCase().contains(searchText.value.toLowerCase())).toList();
+    }
+
+    filteredProducts.value = filtered;
   }
 
+  
+  void updateSearch(String text) {
+    searchText.value = text;
+    applyFilters(); 
+  }
  
 
 }

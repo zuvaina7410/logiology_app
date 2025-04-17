@@ -16,11 +16,11 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Load saved username & password
+
     usernameController.text = box.read('username') ?? '';
     passwordController.text = box.read('password') ?? '';
 
-    // Load saved image path
+  
     final imagePath = box.read('profileImage');
     if (imagePath != null && File(imagePath).existsSync()) {
       profileImage.value = File(imagePath);
@@ -66,26 +66,3 @@ void onClose() {
 
 
 
-//==============================
-//   final picker = ImagePicker();
-
-//   void pickImage() async {
-//     final picked = await picker.pickImage(source: ImageSource.gallery);
-//     if (picked != null) {
-//       profileImage.value = File(picked.path);
-//     }
-//   }
-
-//   void saveProfile() {
-//     final username = usernameController.text.trim();
-//     final password = passwordController.text.trim();
-
-//     if (username.isEmpty || password.isEmpty) {
-//       Get.snackbar("Error", "Username and password can't be empty");
-//     } else {
-//       Get.snackbar("Success", "Profile updated!");
-      
-//     }
-//   }
-
-// }

@@ -31,47 +31,58 @@ class HomePage extends StatelessWidget {
    
     ],
     ),
-      body: Obx(() {
-        // return GridView.builder(
-        //   padding: EdgeInsets.all(10),
-        //   itemCount: productController.productList.length,          
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //       crossAxisCount: 2, childAspectRatio: 0.7), 
-        //   itemBuilder: (context,index){
-        //     final product = productController.productList[index];
-         return GridView.builder(
-            itemCount: productController.filteredProducts.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-               crossAxisCount: 2, childAspectRatio: 0.7), 
-            itemBuilder: (context, index) {
-              final product = productController.filteredProducts[index];
-            return Card(
-              
-              elevation: 4,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   Expanded(
-                    child: Image.network(product.thumbnail, fit: BoxFit.cover, width: double.infinity),
-                  ),
-                    Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(product.title, maxLines: 1, overflow: TextOverflow.ellipsis),
-                  ),
-                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("₹${product.price}", style: TextStyle(fontWeight: FontWeight.bold)),
-                  ),
-                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                    child: Text("⭐ ${product.rating}"),
-                  ),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            TextField(
+                decoration: InputDecoration(
+                  labelText: 'Search Products',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) => productController.updateSearch(value),
               ),
-            );
-          },
-          );
-      })
+              SizedBox(height: 16),
+        
+            Expanded(
+              child: Obx(() {
+                 return GridView.builder(
+                    itemCount: productController.filteredProducts.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                       crossAxisCount: 2, childAspectRatio: 0.7), 
+                    itemBuilder: (context, index) {
+                      final product = productController.filteredProducts[index];
+                    return Card(
+                      
+                      elevation: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           Expanded(
+                            child: Image.network(product.thumbnail, fit: BoxFit.cover, width: double.infinity),
+                          ),
+                            Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(product.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+                          ),
+                           Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text("₹${product.price}", style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                           Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                            child: Text("⭐ ${product.rating}"),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  );
+              }),
+            ),
+          ],
+        ),
+      )
     );
   }
   

@@ -42,7 +42,10 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: controller.saveProfile,
-                  child: Text("Save Changes"),
+                    style:ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[200],
+                ), 
+                  child: Text("Save Changes",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
                 )
         ],
         ),

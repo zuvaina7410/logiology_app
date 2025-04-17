@@ -8,8 +8,6 @@ class LoginPage extends StatelessWidget {
 
 final controller = Get.put(LoginController());
 
-  //const LoginPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +47,7 @@ final controller = Get.put(LoginController());
               //   ),
              
               SizedBox(height: 30,),
-              Container(
+              SizedBox(
                 height: 30,
                 width: MediaQuery.of(context).size.width/2,
                 child: ElevatedButton(
